@@ -1,6 +1,6 @@
 # Producer
 
-Below are some detailed steps required to set up a Kafka consumer.
+Below are some detailed steps required to set up a Kafka producer.
 
 #### kafka-producer.properties
 -----
