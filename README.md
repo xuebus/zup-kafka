@@ -16,7 +16,23 @@ producer.bootstrap.servers=broker_host
 producer.value.serializer=br.com.zup.spring.kafka.producer.serializer.JsonSerializer
 ```
 
-#### Spring Context
+#### Import Spring Configuration
+-----
+
+You must import the queue context configuration file
+
+```java
+
+import br.com.zup.spring.kafka.config.QueueContext;
+
+@Configuration
+@Import(QueueContext.class)
+public class ApplicationContext {
+
+}
+```
+
+#### Configure Spring Context
 -----
 
 ```xml
@@ -48,7 +64,7 @@ producer.value.serializer=br.com.zup.spring.kafka.producer.serializer.JsonSerial
 </beans>
 ```
 
-#### Example (Spring)
+#### Example
 -----
 
 ```java
@@ -82,3 +98,4 @@ public class Example {
 }
 
 ```
+
