@@ -8,7 +8,7 @@ This file should contain the configuration required to start a Kafka producer. T
 
 To find out what settings are available, please access the link:[http://kafka.apache.org/documentation.html#producerconfigs](http://kafka.apache.org/documentation.html#producerconfigs)
 
-> All confiurações this file must have the prefix **producer**
+> All properties of this file must have the prefix **producer**
 > Example: **producer.**bootstrap.servers
 
 ```property
