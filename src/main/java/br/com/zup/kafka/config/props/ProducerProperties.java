@@ -1,9 +1,9 @@
-package br.com.zup.spring.kafka.config.props;
+package br.com.zup.kafka.config.props;
 
+import br.com.zup.kafka.config.props.core.GenericBuilder;
 import org.apache.kafka.common.serialization.StringSerializer;
 
-import br.com.zup.spring.kafka.config.props.core.GenericBuilder;
-import br.com.zup.spring.kafka.producer.serializer.JsonSerializer;
+import br.com.zup.kafka.producer.serializer.JsonSerializer;
 
 public class ProducerProperties extends GenericBuilder {
 

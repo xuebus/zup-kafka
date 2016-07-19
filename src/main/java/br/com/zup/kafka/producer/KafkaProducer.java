@@ -1,4 +1,4 @@
-package br.com.zup.spring.kafka.producer;
+package br.com.zup.kafka.producer;
 
 import java.util.concurrent.Future;
 
@@ -8,7 +8,7 @@ import org.apache.kafka.clients.producer.RecordMetadata;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import br.com.zup.spring.kafka.config.props.ProducerProperties;
+import br.com.zup.kafka.config.props.ProducerProperties;
 
 public class KafkaProducer<K, V> {
     

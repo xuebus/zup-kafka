@@ -1,12 +1,12 @@
-package br.com.zup.spring.kafka.config.props;
+package br.com.zup.kafka.config.props;
 
 import java.util.List;
 
 import org.apache.kafka.common.serialization.StringDeserializer;
 
-import br.com.zup.spring.kafka.config.props.core.GenericBuilder;
-import br.com.zup.spring.kafka.consumer.config.KMessageConsumer;
-import br.com.zup.spring.kafka.consumer.deserializer.JsonDeserializer;
+import br.com.zup.kafka.config.props.core.GenericBuilder;
+import br.com.zup.kafka.consumer.config.KMessageConsumer;
+import br.com.zup.kafka.consumer.deserializer.JsonDeserializer;
 
 public class ConsumerProperties<K, V> extends GenericBuilder {
 

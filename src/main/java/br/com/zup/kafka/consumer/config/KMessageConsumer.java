@@ -1,4 +1,4 @@
-package br.com.zup.spring.kafka.consumer.config;
+package br.com.zup.kafka.consumer.config;
 
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 

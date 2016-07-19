@@ -1,14 +1,13 @@
-package br.com.zup.spring.kafka.consumer;
+package br.com.zup.kafka.consumer;
 
 import java.util.List;
 
+import br.com.zup.kafka.config.props.ConsumerProperties;
+import br.com.zup.kafka.consumer.config.KMessageConsumer;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.apache.kafka.common.errors.WakeupException;
-
-import br.com.zup.spring.kafka.config.props.ConsumerProperties;
-import br.com.zup.spring.kafka.consumer.config.KMessageConsumer;
 
 public class ConsumerProcess<K, V> implements Runnable {
 

@@ -1,8 +1,8 @@
-package br.com.zup.spring.kafka.config.props;
+package br.com.zup.kafka.config.props;
 
 import java.util.List;
 
-import br.com.zup.spring.kafka.consumer.config.KMessageConsumer;
+import br.com.zup.kafka.consumer.config.KMessageConsumer;
 
 public class PropertyBuilder {
     
