@@ -1,12 +1,11 @@
 package br.com.zup.kafka.config.props;
 
-import java.util.List;
-
-import org.apache.kafka.common.serialization.StringDeserializer;
-
 import br.com.zup.kafka.config.props.core.GenericBuilder;
 import br.com.zup.kafka.consumer.config.KMessageConsumer;
 import br.com.zup.kafka.consumer.deserializer.JsonDeserializer;
+import org.apache.kafka.common.serialization.StringDeserializer;
+
+import java.util.List;
 
 public class ConsumerProperties<K, V> extends GenericBuilder {
 
@@ -43,6 +42,11 @@ public class ConsumerProperties<K, V> extends GenericBuilder {
         if (clazz != String.class && !isPropertyPresent("value.deserializer")) {
             withValueDeserializer(JsonDeserializer.class);
         }
+        return this;
+    }
+
+    public ConsumerProperties<K, V> withWildcardMatch(boolean wildcardMatch) {
+        props.put("kafka.topic.wildcard.match", wildcardMatch);
         return this;
     }
 
