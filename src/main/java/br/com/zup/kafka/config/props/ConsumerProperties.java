@@ -67,5 +67,6 @@ public class ConsumerProperties<K, V> extends GenericBuilder {
     public void addDefaults() {
         addIfNull("key.deserializer", StringDeserializer.class.getName());
         addIfNull("value.deserializer", StringDeserializer.class.getName());
+        addIfNull("auto.offset.reset", "earliest");
     }
 }
