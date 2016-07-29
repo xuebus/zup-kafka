@@ -45,11 +45,6 @@ public class ConsumerProperties<K, V> extends GenericBuilder {
         return this;
     }
 
-    public ConsumerProperties<K, V> withWildcardMatch(boolean wildcardMatch) {
-        props.put("kafka.topic.wildcard.match", wildcardMatch);
-        return this;
-    }
-
     public ConsumerProperties<K, V> withTopics(List<String> topics) {
         this.topics = topics;
         return this;
