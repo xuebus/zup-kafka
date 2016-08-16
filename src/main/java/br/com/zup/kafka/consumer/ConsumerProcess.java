@@ -2,6 +2,7 @@ package br.com.zup.kafka.consumer;
 
 import java.util.List;
 
+import br.com.zup.kafka.KafkaMessage;
 import br.com.zup.kafka.config.props.ConsumerProperties;
 import br.com.zup.kafka.consumer.config.KMessageConsumer;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
@@ -14,7 +15,7 @@ public class ConsumerProcess<K, V> implements Runnable {
     private final int id;
     private final List<String> topics;
     private final KMessageConsumer<K, V> messageConsumer;
-    private final KafkaConsumer<K, V> consumer;
+    private final KafkaConsumer<K, KafkaMessage<V>> consumer;
 
     public ConsumerProcess(Integer id, ConsumerProperties<K, V> consumerProps) {
         this.id = id;
@@ -29,8 +30,8 @@ public class ConsumerProcess<K, V> implements Runnable {
             consumer.subscribe(topics);
 
             while (true) {
-                ConsumerRecords<K, V> records = consumer.poll(Long.MAX_VALUE);
-                for (ConsumerRecord<K, V> record : records) {
+                ConsumerRecords<K, KafkaMessage<V>> records = consumer.poll(Long.MAX_VALUE);
+                for (ConsumerRecord<K, KafkaMessage<V>> record : records) {
                     messageConsumer.consume(id, record);
                 }
             }
