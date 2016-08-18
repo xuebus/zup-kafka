@@ -48,7 +48,7 @@ public class KafkaMessage<V> {
 
     public String getHeader(String key) {
         if (this.headers != null) {
-            this.headers.get(key);
+            return this.headers.get(key);
         }
         return null;
     }
