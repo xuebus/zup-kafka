@@ -8,6 +8,8 @@ public class KafkaMessage<V> {
     private Map<String, String> headers;
     private V payload;
 
+    private KafkaMessage() {}
+
     private KafkaMessage(V payload, Map<String, String> headers) {
         this.payload = payload;
         this.headers = headers;

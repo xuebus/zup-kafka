@@ -1,5 +1,9 @@
 package br.com.zup.kafka.consumer.deserializer;
 
+import br.com.zup.kafka.KafkaMessage;
+import br.com.zup.kafka.ZnsMessage;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.kafka.common.errors.SerializationException;
@@ -14,6 +18,8 @@ public class JsonDeserializer implements Deserializer<Object> {
 
     private Class<?> clazz;
 
+    private JavaType type;
+
     @Override
     public void configure(Map<String, ?> configs, boolean isKey) {
 
@@ -23,6 +29,7 @@ public class JsonDeserializer implements Deserializer<Object> {
                 throw new SerializationException("Property [deserializer.class] must be informed");
             }
             clazz = Class.forName(deserializerClazz);
+            type = MAPPER.getTypeFactory().constructParametrizedType(KafkaMessage.class, KafkaMessage.class, clazz);
         } catch (ClassNotFoundException e) {
             throw new SerializationException("Error when configure deserializeble class. Class: " + clazz + " not found in context", e);
         }
@@ -31,7 +38,7 @@ public class JsonDeserializer implements Deserializer<Object> {
     @Override
     public Object deserialize(String topic, byte[] data) {
         try {
-            return MAPPER.readValue(data, clazz);
+            return MAPPER.readValue(data, type);
         } catch (IOException e) {
             throw new SerializationException("Error when deserializing byte[] to object", e);
         }
@@ -39,7 +46,6 @@ public class JsonDeserializer implements Deserializer<Object> {
 
     @Override
     public void close() {
-
     }
 
 }
