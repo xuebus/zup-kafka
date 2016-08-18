@@ -26,7 +26,7 @@ public class KafkaProducer<K, V> {
         return producer.send(new ProducerRecord<>(topic, KafkaMessage.of(message)));
     }
 
-    public Future<RecordMetadata> send(String topic, V message, Map<String, Object> headers) {
+    public Future<RecordMetadata> send(String topic, V message, Map<String, String> headers) {
         return producer.send(new ProducerRecord<>(topic, KafkaMessage.of(message, headers)));
     }
 
