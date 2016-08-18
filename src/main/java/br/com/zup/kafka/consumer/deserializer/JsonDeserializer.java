@@ -1,8 +1,6 @@
 package br.com.zup.kafka.consumer.deserializer;
 
 import br.com.zup.kafka.KafkaMessage;
-import br.com.zup.kafka.ZnsMessage;
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.lang3.StringUtils;
