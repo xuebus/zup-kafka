@@ -1,5 +1,7 @@
 package br.com.zup.kafka;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -8,7 +10,8 @@ public class KafkaMessage<V> {
     private Map<String, String> headers;
     private V payload;
 
-    private KafkaMessage() {}
+    private KafkaMessage() {
+    }
 
     private KafkaMessage(V payload, Map<String, String> headers) {
         this.payload = payload;
@@ -60,4 +63,11 @@ public class KafkaMessage<V> {
         return null;
     }
 
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("headers", headers)
+                .append("payload", payload)
+                .toString();
+    }
 }
