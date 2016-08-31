@@ -1,15 +1,16 @@
 package br.com.zup.kafka.config.props;
 
 import java.util.List;
+import java.util.regex.Pattern;
 
 import br.com.zup.kafka.consumer.config.KMessageConsumer;
 
 public class PropertyBuilder {
     
-    public static <K, V> ConsumerProperties<K, V> consumer(List<String> topics, KMessageConsumer<K, V> messageConsumer) {
-        return new ConsumerProperties<K, V>(topics, messageConsumer);
+    public static <K, V> ConsumerProperties<K, V> consumer(KMessageConsumer<K, V> messageConsumer) {
+        return new ConsumerProperties<K, V>(messageConsumer);
     }
-    
+
     public static ProducerProperties producer() {
         return new ProducerProperties();
     }

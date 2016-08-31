@@ -50,11 +50,10 @@ public class ConsumerProperties<K, V> extends GenericBuilder {
         return this;
     }
 
-    public ConsumerProperties<K, V> autoOffsetReset(String autoOffsetReset) {
-        props.put("auto.offset.reset", autoOffsetReset);
+    public ConsumerProperties<K, V> withAutoOffsetReset(OffsetReset offsetReset) {
+        props.put("auto.offset.reset", offsetReset.name().toLowerCase());
         return this;
     }
-
 
     public ConsumerProperties<K, V> withTopics(List<String> topics) {
         this.topics = topics;
