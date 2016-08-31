@@ -3,17 +3,22 @@ package br.com.zup.kafka.config.props;
 import br.com.zup.kafka.config.props.core.GenericBuilder;
 import br.com.zup.kafka.consumer.config.KMessageConsumer;
 import br.com.zup.kafka.consumer.deserializer.JsonDeserializer;
+import br.com.zup.kafka.util.Assert;
+import org.apache.kafka.clients.consumer.ConsumerRebalanceListener;
+import org.apache.kafka.clients.consumer.internals.NoOpConsumerRebalanceListener;
 import org.apache.kafka.common.serialization.StringDeserializer;
 
 import java.util.List;
+import java.util.regex.Pattern;
 
 public class ConsumerProperties<K, V> extends GenericBuilder {
 
     private List<String> topics;
+    private Pattern topicPattern;
+    private ConsumerRebalanceListener consumerRebalanceListener = new NoOpConsumerRebalanceListener();
     private KMessageConsumer<K, V> messageConsumer;
 
-    ConsumerProperties(List<String> topics, KMessageConsumer<K, V> messageConsumer) {
-        this.topics = topics;
+    ConsumerProperties(KMessageConsumer<K, V> messageConsumer) {
         this.messageConsumer = messageConsumer;
     }
 
@@ -45,23 +50,56 @@ public class ConsumerProperties<K, V> extends GenericBuilder {
         return this;
     }
 
+    public ConsumerProperties<K, V> autoOffsetReset(String autoOffsetReset) {
+        props.put("auto.offset.reset", autoOffsetReset);
+        return this;
+    }
+
+
     public ConsumerProperties<K, V> withTopics(List<String> topics) {
         this.topics = topics;
         return this;
     }
 
-    public List<String> topics() {
-        return topics;
+    public ConsumerProperties<K, V> withTopicPattern(Pattern topicPattern) {
+        this.topicPattern = topicPattern;
+        return this;
     }
 
-    public KMessageConsumer<K, V> messageConsumer() {
-        return messageConsumer;
+    public ConsumerProperties<K, V> withConsumerRebalanceListener(ConsumerRebalanceListener consumerRebalanceListener) {
+        this.consumerRebalanceListener = consumerRebalanceListener;
+        return this;
     }
 
     @Override
     public void addDefaults() {
         addIfNull("key.deserializer", StringDeserializer.class.getName());
         addIfNull("value.deserializer", StringDeserializer.class.getName());
-        addIfNull("auto.offset.reset", "earliest");
+    }
+
+    public void validate() {
+        Assert.assertFalse((topicPattern == null && (topics == null || topics.isEmpty())), "KMessageConsumer cannot be null");
+        Assert.notNull(messageConsumer, "KMessageConsumer cannot be null");
+        Assert.notNull(consumerRebalanceListener);
+    }
+
+    public Pattern getTopicPattern() {
+        return topicPattern;
+    }
+
+    public List<String> getTopics() {
+        return topics;
+    }
+
+    public KMessageConsumer<K, V> getMessageConsumer() {
+        return messageConsumer;
+    }
+
+    public ConsumerRebalanceListener getConsumerRebalanceListener() {
+        return consumerRebalanceListener;
+    }
+
+    public boolean isTopicByPattern() {
+        return topicPattern != null;
     }
 }
