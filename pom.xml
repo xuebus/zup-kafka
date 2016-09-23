@@ -4,10 +4,10 @@
 
 	<groupId>br.com.zup</groupId>
 	<artifactId>zup-kafka</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>spring-kafka</name>
+	<name>zup-kafka</name>
 	<url>http://maven.apache.org</url>
 
 	<properties>
