@@ -4,6 +4,7 @@ import br.com.zup.kafka.config.props.core.GenericBuilder;
 import br.com.zup.kafka.consumer.config.KMessageConsumer;
 import br.com.zup.kafka.consumer.deserializer.JsonDeserializer;
 import br.com.zup.kafka.util.Assert;
+import com.fasterxml.jackson.databind.JavaType;
 import org.apache.kafka.clients.consumer.ConsumerRebalanceListener;
 import org.apache.kafka.clients.consumer.internals.NoOpConsumerRebalanceListener;
 import org.apache.kafka.common.serialization.StringDeserializer;
@@ -43,10 +44,14 @@ public class ConsumerProperties<K, V> extends GenericBuilder {
     }
 
     public ConsumerProperties<K, V> withDeserializerClass(Class<?> clazz) {
-        props.put("deserializer.class", clazz.getName());
-        if (clazz != String.class && !isPropertyPresent("value.deserializer")) {
-            withValueDeserializer(JsonDeserializer.class);
-        }
+        props.put("deserializer.type", clazz);
+        withValueDeserializer(JsonDeserializer.class);
+        return this;
+    }
+
+    public ConsumerProperties<K, V> withDeserializerType(JavaType type) {
+        props.put("deserializer.type", type);
+        withValueDeserializer(JsonDeserializer.class);
         return this;
     }
 

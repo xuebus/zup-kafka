@@ -1,8 +1,5 @@
 package br.com.zup.kafka.config.props;
 
-import java.util.List;
-import java.util.regex.Pattern;
-
 import br.com.zup.kafka.consumer.config.KMessageConsumer;
 
 public class PropertyBuilder {
