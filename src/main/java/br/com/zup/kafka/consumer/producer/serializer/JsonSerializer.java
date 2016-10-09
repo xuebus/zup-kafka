@@ -1,4 +1,4 @@
-package br.com.zup.kafka.producer.serializer;
+package br.com.zup.kafka.consumer.producer.serializer;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Map;

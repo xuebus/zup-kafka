@@ -1,4 +1,4 @@
-package br.com.zup.kafka.consumer;
+package br.com.zup.kafka.consumer.consumer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,7 +6,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
-import br.com.zup.kafka.config.props.ConsumerProperties;
+import br.com.zup.kafka.consumer.config.props.ConsumerProperties;
 
 public class ConsumerRunner {
     

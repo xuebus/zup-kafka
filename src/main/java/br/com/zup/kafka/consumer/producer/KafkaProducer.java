@@ -1,16 +1,15 @@
-package br.com.zup.kafka.producer;
+package br.com.zup.kafka.consumer.producer;
 
 import java.util.Map;
 import java.util.concurrent.Future;
 
-import br.com.zup.kafka.KafkaMessage;
+import br.com.zup.kafka.consumer.KafkaMessage;
+import br.com.zup.kafka.consumer.config.props.ProducerProperties;
 import org.apache.kafka.clients.producer.Producer;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.clients.producer.RecordMetadata;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import br.com.zup.kafka.config.props.ProducerProperties;
 
 public class KafkaProducer<K, V> {
     

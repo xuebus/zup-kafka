@@ -1,4 +1,4 @@
-package br.com.zup.kafka.util;
+package br.com.zup.kafka.consumer.util;
 
 import java.util.Map;
 import java.util.Properties;

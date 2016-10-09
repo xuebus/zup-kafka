@@ -1,4 +1,4 @@
-package br.com.zup.kafka.config.props.core;
+package br.com.zup.kafka.consumer.config.props.core;
 
 import java.util.Properties;
 

@@ -1,7 +1,7 @@
-package br.com.zup.kafka.consumer;
+package br.com.zup.kafka.consumer.consumer;
 
-import br.com.zup.kafka.KafkaMessage;
-import br.com.zup.kafka.config.props.ConsumerProperties;
+import br.com.zup.kafka.consumer.KafkaMessage;
+import br.com.zup.kafka.consumer.config.props.ConsumerProperties;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;

@@ -1,4 +1,4 @@
-package br.com.zup.kafka;
+package br.com.zup.kafka.consumer;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
@@ -13,7 +13,7 @@ public class KafkaMessage<V> {
     private KafkaMessage() {
     }
 
-    private KafkaMessage(V payload, Map<String, String> headers) {
+    public KafkaMessage(V payload, Map<String, String> headers) {
         this.payload = payload;
         this.headers = headers;
     }

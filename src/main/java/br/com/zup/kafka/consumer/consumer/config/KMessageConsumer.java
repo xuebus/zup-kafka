@@ -1,6 +1,6 @@
-package br.com.zup.kafka.consumer.config;
+package br.com.zup.kafka.consumer.consumer.config;
 
-import br.com.zup.kafka.KafkaMessage;
+import br.com.zup.kafka.consumer.KafkaMessage;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 
 public interface KMessageConsumer<K, V> {
