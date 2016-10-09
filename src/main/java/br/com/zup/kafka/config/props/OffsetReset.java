@@ -1,4 +1,4 @@
-package br.com.zup.kafka.consumer.config.props;
+package br.com.zup.kafka.config.props;
 
 public enum OffsetReset {
 

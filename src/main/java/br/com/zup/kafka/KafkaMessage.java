@@ -1,4 +1,4 @@
-package br.com.zup.kafka.consumer;
+package br.com.zup.kafka;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 

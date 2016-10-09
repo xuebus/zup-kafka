@@ -1,4 +1,4 @@
-package br.com.zup.kafka.consumer.util;
+package br.com.zup.kafka.util;
 
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;

@@ -1,4 +1,4 @@
-package br.com.zup.kafka.consumer.util;
+package br.com.zup.kafka.util;
 
 import org.apache.commons.lang3.StringUtils;
 

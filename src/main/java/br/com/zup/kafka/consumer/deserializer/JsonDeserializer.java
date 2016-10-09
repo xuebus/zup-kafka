@@ -1,19 +1,16 @@
-package br.com.zup.kafka.consumer.consumer.deserializer;
+package br.com.zup.kafka.consumer.deserializer;
 
-import br.com.zup.kafka.consumer.KafkaMessage;
-import br.com.zup.kafka.consumer.util.JavaTypeBuilder;
+import br.com.zup.kafka.KafkaMessage;
+import br.com.zup.kafka.util.JavaTypeBuilder;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.kafka.common.errors.SerializationException;
 import org.apache.kafka.common.serialization.Deserializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
 
 public class JsonDeserializer implements Deserializer<Object> {

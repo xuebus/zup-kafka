@@ -1,10 +1,9 @@
-package br.com.zup.kafka.consumer.config.props;
+package br.com.zup.kafka.config.props;
 
-import br.com.zup.kafka.consumer.KafkaMessage;
-import br.com.zup.kafka.consumer.config.props.core.GenericBuilder;
-import br.com.zup.kafka.consumer.consumer.config.KMessageConsumer;
-import br.com.zup.kafka.consumer.consumer.deserializer.JsonDeserializer;
-import br.com.zup.kafka.consumer.util.Assert;
+import br.com.zup.kafka.config.props.core.GenericBuilder;
+import br.com.zup.kafka.consumer.config.KMessageConsumer;
+import br.com.zup.kafka.consumer.deserializer.JsonDeserializer;
+import br.com.zup.kafka.util.Assert;
 import com.fasterxml.jackson.databind.JavaType;
 import org.apache.kafka.clients.consumer.ConsumerRebalanceListener;
 import org.apache.kafka.clients.consumer.internals.NoOpConsumerRebalanceListener;

@@ -1,6 +1,6 @@
-package br.com.zup.kafka.consumer.config.props;
+package br.com.zup.kafka.config.props;
 
-import br.com.zup.kafka.consumer.consumer.config.KMessageConsumer;
+import br.com.zup.kafka.consumer.config.KMessageConsumer;
 
 public class PropertyBuilder {
     

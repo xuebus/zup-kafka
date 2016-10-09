@@ -1,6 +1,7 @@
 package br.com.zup.kafka.consumer;
 
-import br.com.zup.kafka.consumer.consumer.config.KMessageConsumer;
+import br.com.zup.kafka.KafkaMessage;
+import br.com.zup.kafka.consumer.config.KMessageConsumer;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -1,14 +1,14 @@
 package br.com.zup.kafka.consumer.typetests;
 
 import br.com.zup.kafka.consumer.TestConfigs;
-import br.com.zup.kafka.consumer.config.props.ConsumerProperties;
-import br.com.zup.kafka.consumer.config.props.OffsetReset;
-import br.com.zup.kafka.consumer.config.props.ProducerProperties;
-import br.com.zup.kafka.consumer.config.props.PropertyBuilder;
-import br.com.zup.kafka.consumer.consumer.ConsumerRunner;
+import br.com.zup.kafka.config.props.ConsumerProperties;
+import br.com.zup.kafka.config.props.OffsetReset;
+import br.com.zup.kafka.config.props.ProducerProperties;
+import br.com.zup.kafka.config.props.PropertyBuilder;
+import br.com.zup.kafka.consumer.ConsumerRunner;
 import br.com.zup.kafka.consumer.GenericConsumerHandler;
-import br.com.zup.kafka.consumer.producer.KafkaProducer;
-import br.com.zup.kafka.consumer.util.JavaTypeBuilder;
+import br.com.zup.kafka.producer.KafkaProducer;
+import br.com.zup.kafka.util.JavaTypeBuilder;
 import org.junit.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
