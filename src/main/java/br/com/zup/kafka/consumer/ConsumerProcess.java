@@ -28,7 +28,12 @@ public class ConsumerProcess<K, V> implements Runnable {
             while (true) {
                 ConsumerRecords<K, KafkaMessage<V>> records = consumer.poll(Long.MAX_VALUE);
                 for (ConsumerRecord<K, KafkaMessage<V>> record : records) {
-                    consumerProps.getMessageConsumer().consume(id, record);
+                    KafkaMessage<V> message = record.value();
+                    if(message == null) {
+                        // ignore invalid payload
+                    }else{
+                        consumerProps.getMessageConsumer().consume(id, record);
+                    }
                 }
             }
         } catch (WakeupException e) {

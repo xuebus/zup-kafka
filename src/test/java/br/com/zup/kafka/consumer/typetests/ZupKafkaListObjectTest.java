@@ -17,6 +17,7 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.time.LocalDate;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -61,7 +62,7 @@ public class ZupKafkaListObjectTest {
     @Test
     public void listObjectTest() throws ExecutionException, InterruptedException {
         listObjectConsumerHandler.setCountDown(1);
-        producer.send(TOPIC, Collections.singletonList(new SampleTO("listObjectTestMsg"))).get();
+        producer.send(TOPIC, Collections.singletonList(new SampleTO("listObjectTestMsg", LocalDate.now()))).get();
         Assert.assertEquals(listObjectConsumerHandler.await(), true);
     }
 

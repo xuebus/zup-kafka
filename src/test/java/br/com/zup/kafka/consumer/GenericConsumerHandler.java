@@ -29,7 +29,8 @@ public class GenericConsumerHandler<T> implements KMessageConsumer<String, T> {
 
     @Override
     public void consume(Integer threadId, ConsumerRecord<String, KafkaMessage<T>> consumerRecord) {
-        LOGGER.info(consumerRecord.value().getPayload().toString());
+        final T payload = consumerRecord.value().getPayload();
+        LOGGER.info(payload != null ? payload.toString() : "ConsumerHandler ignore invalid message");
         latch.countDown();
     }
 }

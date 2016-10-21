@@ -10,7 +10,6 @@ import org.apache.kafka.common.serialization.Deserializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.IOException;
 import java.util.Map;
 
 public class JsonDeserializer implements Deserializer<Object> {
@@ -40,9 +39,9 @@ public class JsonDeserializer implements Deserializer<Object> {
     public Object deserialize(String topic, byte[] data) {
         try {
             return MAPPER.readValue(data, type);
-        } catch (IOException e) {
-            LOGGER.error("Error when deserializing byte[] to object", e);
-            throw new SerializationException("Error when deserializing byte[] to object", e);
+        } catch (Exception e) {
+            LOGGER.error("Error when deserializing byte[] '{}' to object", new String(data), e);
+            return null;
         }
     }
 
