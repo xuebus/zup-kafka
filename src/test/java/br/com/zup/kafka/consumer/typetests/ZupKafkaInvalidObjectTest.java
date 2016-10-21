@@ -31,7 +31,7 @@ public class ZupKafkaInvalidObjectTest {
     private static KafkaProducer<String, String> producerInvalidString;
     private static KafkaProducer<String, SampleTO> producer;
 
-    private static final String TOPIC = "zup_kafka_object_topic";
+    private static final String TOPIC = "zup_kafka_object_invalid_topic";
 
     private static ExecutorService consumerExecutorService;
 
