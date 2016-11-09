@@ -42,7 +42,7 @@ public class ConsumerProcess<K, V> implements Runnable {
     private void invokeConsumerHandler(ConsumerRecord<K, KafkaMessage<V>> record) {
         try {
             consumerProps.getMessageConsumer().consume(id, record);
-        } catch (Exception e) {
+        } catch (Throwable e) {
             LOG.error("Fail to consume message: '{}'", record == null ? "record is null" : record.toString(), e);
         }
     }
