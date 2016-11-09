@@ -3,11 +3,14 @@ package br.com.zup.kafka.consumer;
 import br.com.zup.kafka.KafkaMessage;
 import br.com.zup.kafka.config.props.ConsumerProperties;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
-import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.apache.kafka.common.errors.WakeupException;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class ConsumerProcess<K, V> implements Runnable {
+
+    private final static Logger LOG = LogManager.getLogger(ConsumerProcess.class.getName());
 
     private final int id;
     private final ConsumerProperties<K, V> consumerProps;
@@ -26,15 +29,21 @@ public class ConsumerProcess<K, V> implements Runnable {
             subscribe();
 
             while (true) {
-                ConsumerRecords<K, KafkaMessage<V>> records = consumer.poll(Long.MAX_VALUE);
-                for (ConsumerRecord<K, KafkaMessage<V>> record : records) {
-                    consumerProps.getMessageConsumer().consume(id, record);
-                }
+                consumer.poll(Long.MAX_VALUE).forEach(this::invokeConsumerHandler);
             }
+
         } catch (WakeupException e) {
             // ignore for shutdown
         } finally {
             consumer.close();
+        }
+    }
+
+    private void invokeConsumerHandler(ConsumerRecord<K, KafkaMessage<V>> record) {
+        try {
+            consumerProps.getMessageConsumer().consume(id, record);
+        } catch (Exception e) {
+            LOG.error("Fail to consume message: '{}'", record == null ? "record is null" : record.toString(), e);
         }
     }
 
