@@ -34,7 +34,6 @@ public class ConsumerProcess<K, V> implements Runnable {
                 checkIfCommitIsNecessary();
                 records.forEach(this::invokeConsumerHandler);
             }
-
         } catch (WakeupException e) {
             // ignore for shutdown
         } finally {
@@ -51,13 +50,12 @@ public class ConsumerProcess<K, V> implements Runnable {
     }
 
     private void checkIfCommitIsNecessary() {
-        if (consumerProps.isCommitAsync()) {
-            consumer.commitAsync();
-            return;
-        }
-        if (consumerProps.isCommitSync()) {
-            consumer.commitSync();
-            return;
+        if (!consumerProps.isEnableAutoCommit()) {
+            if (consumerProps.isCommitAsync()) {
+                consumer.commitAsync();
+            } else {
+                consumer.commitSync();
+            }
         }
     }
 

@@ -20,6 +20,7 @@ public class ConsumerProperties<K, V> extends GenericBuilder {
     private KMessageConsumer<K, V> messageConsumer;
     private boolean commitAsync = false;
     private boolean commitSync = false;
+    private boolean enableAutoCommit = true;
 
     ConsumerProperties(KMessageConsumer<K, V> messageConsumer) {
         this.messageConsumer = messageConsumer;
@@ -79,6 +80,7 @@ public class ConsumerProperties<K, V> extends GenericBuilder {
 
     public ConsumerProperties<K, V> withEnableAutoCommit(boolean enableAutoCommit) {
         props.put("enable.auto.commit", enableAutoCommit);
+        this.enableAutoCommit = enableAutoCommit;
         return this;
     }
 
@@ -137,5 +139,9 @@ public class ConsumerProperties<K, V> extends GenericBuilder {
 
     public boolean isCommitSync() {
         return commitSync;
+    }
+
+    public boolean isEnableAutoCommit() {
+        return enableAutoCommit;
     }
 }
