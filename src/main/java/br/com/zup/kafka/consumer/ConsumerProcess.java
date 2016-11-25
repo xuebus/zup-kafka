@@ -6,12 +6,12 @@ import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.apache.kafka.common.errors.WakeupException;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class ConsumerProcess<K, V> implements Runnable {
 
-    private final static Logger LOG = LogManager.getLogger(ConsumerProcess.class.getName());
+    private final static Logger LOG = LoggerFactory.getLogger(ConsumerProcess.class.getName());
 
     private final int id;
     private final ConsumerProperties<K, V> consumerProps;
