@@ -3,6 +3,7 @@ package br.com.zup.kafka.consumer;
 import br.com.zup.kafka.KafkaMessage;
 import br.com.zup.kafka.config.props.ConsumerProperties;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
+import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.apache.kafka.common.errors.WakeupException;
 import org.apache.logging.log4j.LogManager;
@@ -29,7 +30,9 @@ public class ConsumerProcess<K, V> implements Runnable {
             subscribe();
 
             while (true) {
-                consumer.poll(Long.MAX_VALUE).forEach(this::invokeConsumerHandler);
+                ConsumerRecords<K, KafkaMessage<V>> records = consumer.poll(Long.MAX_VALUE);
+                checkIfCommitIsNecessary();
+                records.forEach(this::invokeConsumerHandler);
             }
 
         } catch (WakeupException e) {
@@ -47,13 +50,24 @@ public class ConsumerProcess<K, V> implements Runnable {
         }
     }
 
+    private void checkIfCommitIsNecessary() {
+        if (consumerProps.isCommitAsync()) {
+            consumer.commitAsync();
+            return;
+        }
+        if (consumerProps.isCommitSync()) {
+            consumer.commitSync();
+            return;
+        }
+    }
+
     public void shutdown() {
         consumer.wakeup();
     }
 
     private void subscribe() {
 
-        if(consumerProps.isTopicByPattern()) {
+        if (consumerProps.isTopicByPattern()) {
             consumer.subscribe(consumerProps.getTopicPattern(), consumerProps.getConsumerRebalanceListener());
         } else {
             consumer.subscribe(consumerProps.getTopics());

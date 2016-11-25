@@ -18,6 +18,8 @@ public class ConsumerProperties<K, V> extends GenericBuilder {
     private Pattern topicPattern;
     private ConsumerRebalanceListener consumerRebalanceListener = new NoOpConsumerRebalanceListener();
     private KMessageConsumer<K, V> messageConsumer;
+    private boolean commitAsync = false;
+    private boolean commitSync = false;
 
     ConsumerProperties(KMessageConsumer<K, V> messageConsumer) {
         this.messageConsumer = messageConsumer;
@@ -75,6 +77,28 @@ public class ConsumerProperties<K, V> extends GenericBuilder {
         return this;
     }
 
+    public ConsumerProperties<K, V> withEnableAutoCommit(boolean enableAutoCommit) {
+        props.put("enable.auto.commit", enableAutoCommit);
+        return this;
+    }
+
+    public ConsumerProperties<K, V> withCommitAsync() {
+        this.commitSync = false;
+        this.commitAsync = true;
+        return this;
+    }
+
+    public ConsumerProperties<K, V> withCommitSync() {
+        this.commitSync = true;
+        this.commitAsync = false;
+        return this;
+    }
+
+    public ConsumerProperties<K, V> withMaxPollRecords(int maxPollRecords) {
+        props.put("max.poll.records", maxPollRecords);
+        return this;
+    }
+
     @Override
     public void addDefaults() {
         addIfNull("key.deserializer", StringDeserializer.class.getName());
@@ -105,5 +129,13 @@ public class ConsumerProperties<K, V> extends GenericBuilder {
 
     public boolean isTopicByPattern() {
         return topicPattern != null;
+    }
+
+    public boolean isCommitAsync() {
+        return commitAsync;
+    }
+
+    public boolean isCommitSync() {
+        return commitSync;
     }
 }
