@@ -30,14 +30,18 @@ public class ConsumerProcess<K, V> implements Runnable {
             subscribe();
 
             while (true) {
+                LOG.trace("Consumer polling...");
                 ConsumerRecords<K, KafkaMessage<V>> records = consumer.poll(Long.MAX_VALUE);
+                LOG.trace("Consumer polled...");
                 checkIfCommitIsNecessary();
+                LOG.trace("Handling {} message(s)...", records.count());
                 records.forEach(this::invokeConsumerHandler);
             }
         } catch (WakeupException e) {
             // ignore for shutdown
         } finally {
             consumer.close();
+            LOG.info("Consumer has closed.");
         }
     }
 
@@ -64,13 +68,11 @@ public class ConsumerProcess<K, V> implements Runnable {
     }
 
     private void subscribe() {
-
         if (consumerProps.isTopicByPattern()) {
             consumer.subscribe(consumerProps.getTopicPattern(), consumerProps.getConsumerRebalanceListener());
         } else {
             consumer.subscribe(consumerProps.getTopics());
         }
-
     }
 
 }
