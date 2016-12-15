@@ -63,6 +63,10 @@ public class ConsumerProperties<K, V> extends GenericBuilder {
         return this;
     }
 
+    public ConsumerProperties<K, V> withSessionTimeoutInMillis(int ms) {
+        props.put("session.timeout.ms", ms);
+        return this;
+    }
     public ConsumerProperties<K, V> withTopics(List<String> topics) {
         this.topics = topics;
         return this;
