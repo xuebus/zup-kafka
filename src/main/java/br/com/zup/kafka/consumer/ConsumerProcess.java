@@ -6,8 +6,12 @@ import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.apache.kafka.common.errors.WakeupException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class ConsumerProcess<K, V> implements Runnable {
+
+    private final static Logger LOG = LoggerFactory.getLogger(ConsumerProcess.class.getName());
 
     private final int id;
     private final ConsumerProperties<K, V> consumerProps;
@@ -26,15 +30,36 @@ public class ConsumerProcess<K, V> implements Runnable {
             subscribe();
 
             while (true) {
+                LOG.trace("Consumer polling...");
                 ConsumerRecords<K, KafkaMessage<V>> records = consumer.poll(Long.MAX_VALUE);
-                for (ConsumerRecord<K, KafkaMessage<V>> record : records) {
-                    consumerProps.getMessageConsumer().consume(id, record);
-                }
+                LOG.trace("Consumer polled...");
+                checkIfCommitIsNecessary();
+                LOG.trace("Handling {} message(s)...", records.count());
+                records.forEach(this::invokeConsumerHandler);
             }
         } catch (WakeupException e) {
             // ignore for shutdown
         } finally {
             consumer.close();
+            LOG.info("Consumer has closed.");
+        }
+    }
+
+    private void invokeConsumerHandler(ConsumerRecord<K, KafkaMessage<V>> record) {
+        try {
+            consumerProps.getMessageConsumer().consume(id, record);
+        } catch (Throwable e) {
+            LOG.error("Fail to consume message: '{}'", record == null ? "record is null" : record.toString(), e);
+        }
+    }
+
+    private void checkIfCommitIsNecessary() {
+        if (!consumerProps.isEnableAutoCommit()) {
+            if (consumerProps.isCommitAsync()) {
+                consumer.commitAsync();
+            } else {
+                consumer.commitSync();
+            }
         }
     }
 
@@ -43,13 +68,11 @@ public class ConsumerProcess<K, V> implements Runnable {
     }
 
     private void subscribe() {
-
-        if(consumerProps.isTopicByPattern()) {
+        if (consumerProps.isTopicByPattern()) {
             consumer.subscribe(consumerProps.getTopicPattern(), consumerProps.getConsumerRebalanceListener());
         } else {
             consumer.subscribe(consumerProps.getTopics());
         }
-
     }
 
 }
