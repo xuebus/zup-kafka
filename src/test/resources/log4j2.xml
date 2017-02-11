@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="OFF" packages="org.graylog2.log4j2">
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg %X%n"/>
+        </Console>
+    </Appenders>
+    <Loggers>
+        <Logger name="br.com.zup" level="DEBUG" additivity="false">
+            <AppenderRef ref="Console" level="DEBUG"/>
+        </Logger>
+        <Root level="WARN">
+            <AppenderRef ref="Console" />
+        </Root>
+    </Loggers>
+</Configuration>

@@ -13,7 +13,7 @@ public class KafkaMessage<V> {
     private KafkaMessage() {
     }
 
-    private KafkaMessage(V payload, Map<String, String> headers) {
+    public KafkaMessage(V payload, Map<String, String> headers) {
         this.payload = payload;
         this.headers = headers;
     }
