@@ -3,7 +3,7 @@
 
 	<groupId>br.com.zup</groupId>
 	<artifactId>zup-kafka</artifactId>
-	<version>1.0.6</version>
+	<version>1.0.7-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<name>zup-kafka</name>
@@ -107,7 +107,7 @@
 		<connection>scm:git:git@github.com:ZupIT/zup-kafka.git</connection>
 		<url>https://github.com/ZupIT/zup-kafka</url>
 		<developerConnection>scm:git:git@github.com:ZupIT/zup-kafka.git</developerConnection>
-		<tag>1.0.6</tag>
+		<tag>HEAD</tag>
 	</scm>
 
     <repositories>
